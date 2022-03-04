@@ -12,6 +12,9 @@ Route::get('/FrontDocument', 'FrontDocumentController@index')->name('FrontDocume
 Route::get('/FrontDocument/create', 'FrontDocumentController@create');
 Route::post('/FrontDocument/store', 'FrontDocumentController@store')->name('FrontDocument.store');
 Route::get('/FrontDocument/{post}', 'FrontDocumentController@show')->name('FrontDocument.show');
+Route::get('/FrontDocument/{post}/edit', 'FrontDocumentController@edit')->name('FrontDocument.edit');
+Route::patch('/FrontDocument/{post}', 'FrontDocumentController@update')->name('FrontDocument.update');
+Route::delete('/FrontDocument/{post}', 'FrontDocumentController@destroy')->name('FrontDocument.destroy');
 
 Route::get('/front', 'FrontController@index')->name('front');
 

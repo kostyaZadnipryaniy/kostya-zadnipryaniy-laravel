@@ -25,11 +25,29 @@ class FrontDocumentController extends Controller
             'description' => 'string',
         ]);
         Document::create($data);
-        return redirect()->route('FrontDocument.index');
+        return redirect()->route('FrontDocument');
      }
 
      public function show(Document $doc) {
-         return view('FrontDocument.show', compact('doc'));
-     }
+        return view('FrontDocument.show', compact('doc'));
+    }
+
+    public function edit(Document $doc) {
+        return view('FrontDocument.edit', compact('doc'));
+    }
+
+    public function update(Document $doc) {
+        $data = request()->validate([
+            'name' => 'string',
+            'description' => 'string',
+        ]);
+        $doc->update($data);
+        return redirect()->route('FrontDocument.show', $doc->id);
+    }
+
+    public function delete(Document $doc) {
+        return view('FrontDocument.delete', compact('doc'));
+    }
+
 
 }
