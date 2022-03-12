@@ -1,91 +1,76 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Front;
 
-use App\Client;
-use App\Project;
-use App\ProjectStatus;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\MyFormRequest;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+class FrontController extends Controller{
 
-class FrontController extends Controller
-{
-   
-    public function index(Request $request)
+    public function index()
     {
-        if ($request->has('parameter')) {
-            $parameter = $request->get('parameter');
+        $front = Front::where('value', 5)->get();
+        foreach ($front as $value) {
+            dump($value);
         }
-
-        $projects = Project::all();
-        $clients  = Client::all();
-
-        //
-        $data = [];
-
-        return view('front.blade.php', $data);
-    }
-    
-    public function formaAjax(MyFormRequest $formRequest)
-    {
-        $result = ['success' => false, 'data' => ''];
-        $fields = $formRequest->validated();
-
-        $id = $fields['id'];
-        $project = Project::where('id','=', $id)->first();
-
-        if (!empty($project)) {
-            $result['success'] = true;
-            $result['data'] = $project;
-        }
-
-        return json_encode($result);
     }
 
-    public function create()
-    {
+    public function create(){
+        $frontArray =[ [
+            'comment' =>'start',
+            'value' => 8,
+        ],[
+            'comment' =>'some',
+            'value' => 7,
+        ],];
 
-        $clients = Client::all()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        $statuses = ProjectStatus::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        return view('admin.projects.create', compact('clients', 'statuses'));
+        foreach($frontArray as $item){
+        Front::create($item);
+    };
+    return 'ok';
     }
 
-    
-    public function edit(Project $project)
+    public function update()
     {
-        abort_if(Gate::denies('project_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $clients = Client::all()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        $statuses = ProjectStatus::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        $project->load('client', 'status');
-
-        return view('admin.projects.edit', compact('clients', 'statuses', 'project'));
+        $front = Front::find(3);
+        $front->update([
+            'comment' =>'new',
+            'value' => 2,
+        ]);
+        return 'update';
     }
 
-    
-    public function show(Project $project)
-    {
-        abort_if(Gate::denies('project_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+    public function delete(){
+       $front = Front::find(2);
+       $front->delete();
+       return 'delete';
+        //  $front = Front::withTrashed()->find(2);
+        //  $front->restore();
+        // return 'delete';
 
-        $project->load('client', 'status');
-
-        return view('admin.projects.show', compact('project'));
     }
 
-    public function destroy(Project $project)
-    {
-        abort_if(Gate::denies('project_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+    public function firstOrCreate(){
+        $frontArray = [
+            'comment' =>'some',
+            'value' => 9,
+        ];
+        $fr = Front::firstOrCreate(['comment' =>'some',], [
+            'comment' =>'some',
+            'value' => 9,
+        ]);
 
-        $project->delete();
+        return 'everything';
+    }
+    public function updateOrCreate(){
+        $frontArray = [
+            'comment' =>'somme',
+            'value' => 11,
+        ];
+        $fr = Front::updateOrCreate(['comment' =>'somme',], [
+            'comment' =>'somme',
+            'value' => 9,
+        ]);
 
-        return back();
+        return 'everything';
     }
 
 }
