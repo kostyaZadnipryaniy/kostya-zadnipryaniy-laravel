@@ -7,25 +7,21 @@ class FrontController extends Controller{
 
     public function index()
     {
-        $front = Front::where('value', 5)->get();
-        foreach ($front as $value) {
-            dump($value);
-        }
+        $front = Front::all();
+        return view('Front.index', compact('front'));
     }
 
     public function create(){
-        $frontArray =[ [
-            'comment' =>'start',
-            'value' => 8,
-        ],[
-            'comment' =>'some',
-            'value' => 7,
-        ],];
-
-        foreach($frontArray as $item){
-        Front::create($item);
-    };
-    return 'ok';
+        
+        return view('Front.create');
+    }
+    
+    public function store(){
+        $data = request()->validate([
+            'comment' => 'string',
+            'value' => '',
+        ]);
+        return view('Front.store');
     }
 
     public function update()

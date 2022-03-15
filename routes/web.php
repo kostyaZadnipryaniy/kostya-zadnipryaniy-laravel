@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::redirect('/', '/login');
 Route::redirect('/home', '/admin');
-Auth::routes(['register' => false]);
+//Auth::routes(['register' => false]);
 
 //Front
 Route::get('/FrontDocument', 'FrontDocumentController@index')->name('FrontDocument');
@@ -16,12 +16,15 @@ Route::get('/FrontDocument/{post}/edit', 'FrontDocumentController@edit')->name('
 Route::patch('/FrontDocument/{post}', 'FrontDocumentController@update')->name('FrontDocument.update');
 Route::delete('/FrontDocument/{post}', 'FrontDocumentController@destroy')->name('FrontDocument.destroy');
 
-Route::get('/Front', 'FrontController@index')->name('Front');
-Route::get('/Front/create', 'FrontController@create')->name('Front.create');
-Route::get('/Front/update', 'FrontController@update')->name('Front.update');
-Route::get('/Front/delete', 'FrontController@delete')->name('Front.delete');
-Route::get('/Front/firstOrCreate', 'FrontController@firstOrCreate')->name('Front.firstOrCreate');
-Route::get('/Front/updateOrCreate', 'FrontController@updateOrCreate')->name('Front.updateOrCreate');
+Route::get( '/fronts', 'FrontController@index')->name('Front');
+Route::get( '/fronts/create', 'FrontController@create');
+Route::post('/fronts', 'FrontController@store')->name('Front.store');
+Route::get( '/fronts/show', 'FrontController@show')->name('Front.show');
+Route::get( '/fronts/edit', 'FrontController@edit')->name('Front.edit');
+Route::get( '/fronts/update', 'FrontController@update')->name('Front.update');
+Route::get( '/fronts/destroy', 'FrontController@destroy')->name('Front.destroy');
+Route::get( '/fronts/firstOrCreate', 'FrontController@firstOrCreate')->name('Front.firstOrCreate');
+Route::get( '/fronts/updateOrCreate', 'FrontController@updateOrCreate')->name('Front.updateOrCreate');
 
 //-----------------------------------------------------------------------------------------------------------------------//
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
