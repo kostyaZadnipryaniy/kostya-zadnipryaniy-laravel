@@ -19,19 +19,28 @@ class FrontController extends Controller{
     public function store(){
         $data = request()->validate([
             'comment' => 'string',
-            'value' => '',
+            'value' => 'integer',
         ]);
-        return view('Front.store');
+        Front::create($data);
+        return redirect()->route('Front.index');
     }
 
-    public function update()
+    public function show(Front $front){
+        return view('Front.show', compact('front'));
+    }
+
+    public function edit(Front $front){
+        return view('Front.edit', compact('front'));
+    }
+
+    public function update(Front $front)
     {
-        $front = Front::find(3);
-        $front->update([
-            'comment' =>'new',
-            'value' => 2,
+        $data = request()->validate([
+            'comment' => 'string',
+            'value' => 'integer',
         ]);
-        return 'update';
+        $front->update($data);
+        return redirect()->route('Front.show', $front->id);
     }
 
     public function delete(){

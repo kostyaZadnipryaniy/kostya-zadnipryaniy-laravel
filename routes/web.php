@@ -16,12 +16,12 @@ Route::get('/FrontDocument/{post}/edit', 'FrontDocumentController@edit')->name('
 Route::patch('/FrontDocument/{post}', 'FrontDocumentController@update')->name('FrontDocument.update');
 Route::delete('/FrontDocument/{post}', 'FrontDocumentController@destroy')->name('FrontDocument.destroy');
 
-Route::get( '/fronts', 'FrontController@index')->name('Front');
-Route::get( '/fronts/create', 'FrontController@create');
+Route::get( '/fronts', 'FrontController@index')->name('Front.index');
+Route::get( '/fronts/create', 'FrontController@create')->name('Front.create');
 Route::post('/fronts', 'FrontController@store')->name('Front.store');
-Route::get( '/fronts/show', 'FrontController@show')->name('Front.show');
-Route::get( '/fronts/edit', 'FrontController@edit')->name('Front.edit');
-Route::get( '/fronts/update', 'FrontController@update')->name('Front.update');
+Route::get( '/fronts/{front}', 'FrontController@show')->name('Front.show');
+Route::get( '/fronts/{front}/edit', 'FrontController@edit')->name('Front.edit');
+Route::patch( '/fronts/{front}', 'FrontController@update')->name('Front.update');
 Route::get( '/fronts/destroy', 'FrontController@destroy')->name('Front.destroy');
 Route::get( '/fronts/firstOrCreate', 'FrontController@firstOrCreate')->name('Front.firstOrCreate');
 Route::get( '/fronts/updateOrCreate', 'FrontController@updateOrCreate')->name('Front.updateOrCreate');
