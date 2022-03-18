@@ -22,7 +22,7 @@ Route::post('/fronts', 'FrontController@store')->name('Front.store');
 Route::get( '/fronts/{front}', 'FrontController@show')->name('Front.show');
 Route::get( '/fronts/{front}/edit', 'FrontController@edit')->name('Front.edit');
 Route::patch( '/fronts/{front}', 'FrontController@update')->name('Front.update');
-Route::get( '/fronts/destroy', 'FrontController@destroy')->name('Front.destroy');
+Route::delete( '/fronts/{front}', 'FrontController@destroy')->name('Front.delete');
 Route::get( '/fronts/firstOrCreate', 'FrontController@firstOrCreate')->name('Front.firstOrCreate');
 Route::get( '/fronts/updateOrCreate', 'FrontController@updateOrCreate')->name('Front.updateOrCreate');
 

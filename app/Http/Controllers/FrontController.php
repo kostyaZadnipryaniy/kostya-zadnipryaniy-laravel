@@ -43,15 +43,12 @@ class FrontController extends Controller{
         return redirect()->route('Front.show', $front->id);
     }
 
-    public function delete(){
-       $front = Front::find(2);
-       $front->delete();
-       return 'delete';
-        //  $front = Front::withTrashed()->find(2);
-        //  $front->restore();
-        // return 'delete';
-
+    public function destroy(Front $front)
+    {
+        $front->delete();
+        return redirect()->route('Front.index');
     }
+
 
     public function firstOrCreate(){
         $frontArray = [

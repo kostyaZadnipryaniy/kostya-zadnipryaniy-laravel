@@ -8,5 +8,4 @@
     </form>
     <a href="{{route('Front.index')}}">main</a><br>
     <a href="{{route('Front.update')}}">update</a><br>
-    <a href="{{route('Front.destroy')}}">destroy</a><br>
     @endsection

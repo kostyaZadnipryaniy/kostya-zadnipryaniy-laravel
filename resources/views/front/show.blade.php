@@ -7,6 +7,11 @@
 
     <a href="{{route('Front.index')}}">main</a><br>
     <a href="{{route('Front.create')}}">create</a><br>
-    <a href="{{route('Front.destroy')}}">destroy</a><br>
+    <a href="{{route('Front.edit', $front->id)}}">edit</a><br>
+    <form action="{{route('Front.delete', $front->id)}}" method="post">
+        @csrf
+        @method('delete')
+        <input type="submit" value="delete">
+    </form>
     @endsection
 

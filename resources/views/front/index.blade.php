@@ -11,7 +11,6 @@
         @endforeach
     </table>
 </div>
-    <a href="{{route('Front.create')}}">create</a><br>
-    <a href="{{route('Front.destroy')}}">destroy</a><br>
+<a href="{{route('Front.create')}}" style="background-color: yellow;">create</a><br>
     @endsection
 
