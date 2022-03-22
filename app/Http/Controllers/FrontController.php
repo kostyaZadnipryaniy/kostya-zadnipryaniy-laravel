@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Front;
+use App\Http\Utils\ClientsUtil; 
 
 class FrontController extends Controller{
 

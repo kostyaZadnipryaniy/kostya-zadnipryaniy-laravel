@@ -7,5 +7,4 @@
         <button type="submit">add</button>
     </form>
     <a href="{{route('Front.index')}}">main</a><br>
-    <a href="{{route('Front.update')}}">update</a><br>
     @endsection
