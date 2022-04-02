@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::redirect('/', '/login');
 Route::redirect('/home', '/admin');
-//Auth::routes(['register' => false]);
+Auth::routes(['register' => true]);
 
 //Front
 Route::get('/FrontDocument', 'FrontDocumentController@index')->name('FrontDocument');

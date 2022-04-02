@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Category;
 use App\Front;
 use App\Http\Utils\ClientsUtil; 
 
@@ -13,14 +15,15 @@ class FrontController extends Controller{
     }
 
     public function create(){
-        
-        return view('Front.create');
+        $categories = Category::all();
+        return view('Front.create', compact('categories'));
     }
     
     public function store(){
         $data = request()->validate([
             'comment' => 'string',
             'value' => 'integer',
+            'data' => 'string',
         ]);
         Front::create($data);
         return redirect()->route('Front.index');

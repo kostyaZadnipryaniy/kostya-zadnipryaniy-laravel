@@ -11,7 +11,11 @@ class Front extends Model
     use HasFactory;
     protected $table = 'fronts';
     protected $guarded = ['value'];
-    protected $fillable = ['comment', 'value'];
+    protected $fillable = ['comment', 'value', 'category_id'];
+
+    public function category(){
+        return $this->belongsTo(Category::class, 'category_id');
+    }
 
     use SoftDeletes;
 }

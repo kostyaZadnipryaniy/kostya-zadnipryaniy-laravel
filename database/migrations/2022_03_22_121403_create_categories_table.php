@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFrontsTable extends Migration
+class CreateCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,11 @@ class CreateFrontsTable extends Migration
      */
     public function up()
     {
-        Schema::create('fronts', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('comment')->nullable();
-            $table->unsignedInteger('value');
+            $table->string('data')->nullable();
             $table->timestamps();
-            $table->softDeletes();
-            
-           
-     });
+        });
     }
 
     /**
@@ -31,6 +27,6 @@ class CreateFrontsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fronts');
+        Schema::dropIfExists('categories');
     }
 }

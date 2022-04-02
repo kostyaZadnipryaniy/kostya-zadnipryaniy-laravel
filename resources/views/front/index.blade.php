@@ -7,6 +7,7 @@
             <td><a href="{{route('Front.show', $unit->id)}}">{{$unit->id}}</a></td>
             <td>{{$unit->comment}}</td>
             <td>{{$unit->value}}</td>
+            <td>{{$unit->category_id}}</td>
         </tr>
         @endforeach
     </table>
